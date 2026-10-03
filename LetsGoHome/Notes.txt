@@ -1,0 +1,4 @@
+***** Progress Notes *****
+- the project got messed up a little, because I think I cloned the repo but never created the project.
+- created the project and put it into my folder, but unsure if that will work
+- Created the class for Dog. Header and source file are "complete".
