@@ -44,7 +44,9 @@ Each week I will summarize my milestone activity and progress by writing a stand
 
 ### Week 1
 
-Replace this paragraph with your stand up for this week. Use the prompts above to summarize your most recent milestone activity and work.
+Stand Up:
+This week was a lot, especially learning how to use GitHub and all of the features required by this class. I have never started a project from scratch and connected it to GitHub, so that has been a challenge. I initially cloned the repo and thought everything was good, but on first opening the FOLDER, I realized that it had no sln files. I had to create a new project inside of the repo I had cloned. Now I am not sure if things will still push and pull correctly. That will certainly be a learning curve. Other than that, this week I have been making some dialog for my game, as well as planning the first steps of what needs to be created, classes, loops, etc. I started creating my classes after actually creating my project and having the solution files. I am still brainstorming the dialog, since there will be a few scenes that will need a sentence or two, but realizing that I am not too creative when it comes to writing.
+Also making a point to continue updating my project issues as I complete items or they need adjusting. Trying to keep a markdown copy in visual studios as well. I feel like I am at a good spot with classes specifically. I am continuing to create/update them this week but will most likely fall into next week as well, and possibly the week after. I have a good base on what I want to do with the game, I just need to implement and figure out the logic. Next week I plan on finishing up the classes I have planned and getting the base game loop completed. I also want to continue planning the game and my objectives.
 
 ### Week 2
 
