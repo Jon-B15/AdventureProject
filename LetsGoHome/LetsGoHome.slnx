@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="LetsGoHome.vcxproj" Id="70a76582-4c6a-43c1-b137-6363b629e7ba" />
+</Solution>
