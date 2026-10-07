@@ -4,3 +4,4 @@
 - Created the class for Dog. Header and source file are "complete".
 - creating the choice struct, this won't be anything to detailed, as I only need (for now) 3 variables, options, scene, item
 - made the scene class, added a default scene, an addchoice function, getters, and variables to the header.
+- built the scene source file and defined getters and the addChoice function

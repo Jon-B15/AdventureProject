@@ -1,0 +1,39 @@
+#pragma once
+#include <map>
+#include <string>
+#include <vector>
+#include "Dog.h"
+#include "Scene.h"
+
+class Game
+{
+public:
+	Game();
+	void run();
+
+private:
+	std::vector<Dog> dogs; //dogs that the user can choose from
+
+	//map to store value pairs to jump to any scene
+	std::map<std::string, Scene> scenes;
+
+	//vector for the inventory
+	std::vector<std::string> inventory;
+
+	//which scene the player is in
+	std::string currentSceneId;
+
+	//setup helpers
+	void createDogs();
+	void buildScenes();
+
+	//steps
+	void selectDog();
+	void showIntro() const;
+
+	//utilities
+	bool hasItem(const std::string& item) const;
+	int readNumber(int min, int max) const; //will keep asking until valid input
+
+};
+
