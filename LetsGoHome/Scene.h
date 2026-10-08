@@ -19,10 +19,11 @@ public:
 		const std::string& requiredItem = "");
 
 	//getters
-	std::string getId();
-	std::string getDescription();
-	std::string getItemFound();
-	bool isEnding();
+	std::string getId() const;
+	std::string getDescription() const;
+	std::string getItemFound() const;
+	const std::vector<Choice>& getChoices() const;
+	bool isEnding() const;
 
 private:
 	std::string id;

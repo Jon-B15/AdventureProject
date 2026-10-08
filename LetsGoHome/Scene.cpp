@@ -17,8 +17,10 @@ void Scene::addChoice(const std::string& text,
 	choices.push_back(Choice{ text, nextSceneId, requiredItem });
 }
 
+const std::vector<Choice>& Scene::getChoices() const { return choices; }
+
 //getters, returing the matching private member
-std::string Scene::getId() { return id; }
-std::string Scene::getDescription() { return description; }
-std::string Scene::getItemFound() { return itemFound; }
-bool Scene::isEnding() { return ending; }
+std::string Scene::getId() const { return id; }
+std::string Scene::getDescription() const { return description; }
+std::string Scene::getItemFound() const { return itemFound; }
+bool Scene::isEnding() const { return ending; }

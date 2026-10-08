@@ -12,8 +12,6 @@ public:
 	void run();
 
 private:
-	std::vector<Dog> dogs; //dogs that the user can choose from
-
 	//map to store value pairs to jump to any scene
 	std::map<std::string, Scene> scenes;
 
@@ -23,13 +21,11 @@ private:
 	//which scene the player is in
 	std::string currentSceneId;
 
-	//setup helpers
-	void createDogs();
+	//setup helper
 	void buildScenes();
 
 	//steps
-	void selectDog();
-	void showIntro() const;
+	void showIntro(const Dog& dog) const;
 
 	//utilities
 	bool hasItem(const std::string& item) const;
