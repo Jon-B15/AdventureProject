@@ -87,6 +87,44 @@ bool Game::hasItem(const std::string& item) const
 	return std::find(inventory.begin(), inventory.end(), item) != inventory.end();
 }
 
+//reads the whole line and only accepts a number between min and max
+int Game::readNumber(int min, int max) const
+{
+	while (true)
+	{
+		std::cout << "> ";
+		std::string line;
+
+		//getline returns false if input is closed
+		if (!std::getline(std::cin, line))
+		{
+			std::exit(0);
+		}
+
+		//line must be non-empty and all digits
+		bool allDigits = !line.empty();
+		for (char c : line)
+		{
+			if (!std::isdigit(static_cast<unsigned char>(c)))
+			{
+				allDigits = false;
+				break;
+			}
+		}
+
+		//no overflowing an int
+		if (allDigits && line.size() <= 4)
+		{
+			int value = std::stoi(line);
+			if (value >= min && value <= max)
+			{
+				return value;
+			}
+		}
+		std::cout << "Please enter a number from " << min << " to " << max << ".\n";
+	}
+}
+
 //showing the numbered breed list
 void Game::run()
 {
