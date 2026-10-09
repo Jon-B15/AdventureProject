@@ -7,3 +7,4 @@
 - built the scene source file and defined getters and the addChoice function
 - updated the dog class and some of game header to accommodate the fact that the user will be selecting a name for the dog.
 - had a syntax error in my game.cpp file in my while loop, getDescription needed to be const, same with the other getters in scene.h
+- main loop is working as intended. each choice leads to a new scene or goes back. Now I want to continue adding features
