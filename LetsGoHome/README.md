@@ -1,22 +1,4 @@
-# 🚀 Welcome to Project & Portfolio!
 
-This repository will be used to keep track of research and development conducted in this class. Follow the instructions below to get started.
-cos
-### Getting Started
-
-**1.** Review the [About](./docs/01_about/README.md) README and all of the links it provides.
-
-**2.** Review the documentation and [Getting Started](./docs/02_getting_started/README.md) steps in this repository's docs folder.
-
-**3.** Attend the first Live Lecture to see a live setup demo. If you are unable to attend, make sure to watch the archive.
-
-### Next Steps...
-
-After completing the above steps, feel free to begin updating this readme where indicated below. Remember to update this document each week to receive proper credit for the weekly Milestone assignment.
-
-<br>
-
-> ❗️ &nbsp; Now that you have read to this point, go ahead and delete this sentence and everything above it.
 
 <br>
 
@@ -24,7 +6,7 @@ After completing the above steps, feel free to begin updating this readme where 
 
 ### Student First & Last Name
 
-Hello my name is [enter name]. I am a student from [where are you from?]. The purpose of this repository is to practice development using version control. This work will help me begin to build a portfolio of skills and accomplishment that can be shared in the future.
+Hello my name is Jon Bangert. I am a student from Lees Summit, MO. The purpose of this repository is to practice development using version control. This work will help me begin to build a portfolio of skills and accomplishment that can be shared in the future.
 
 <br>
 
@@ -50,7 +32,9 @@ Also making a point to continue updating my project issues as I complete items o
 
 ### Week 2
 
-My next stand up will go here...
+This week I focused on finishing my classes, updating my "combat" system, and building out the dialog for the game. One of my challenges is that I am not very good with words, hence my coding career and not a salesman. But this forced me to step out of my comfort zone and work on dialog for the scenes, which came together pretty well. I think they are a bit bland at the moment so I might add some or spruce them up a bit with some art. Another challenge was an error that I had to track down. I had a few getters in one of my classes that were not const, and when I went to call them, none of them worked. The error wasn't directly on my getter, so I was a bit confused at first. Once I tried a few things that weren't working, I eventually made my way to my header file where I saw the mistake.
+One of my accomplishments this week was completing the base game. My loop runs through my Game class and then is called in main to run. But I tested the scenes and all of them are working as intended. I do think it is a bit bland and am wanting to add in some more features. Another accomplishment was learning how to use emplace to build my scenes. Emplace adds a new key-value pair to the map only if the key doesn't already exist. If the key is already there, it leaves the existing scene unchanged instead of overwriting it. Because Scene does not have a default constructor, I used this instead of operator[].
+My next steps are taking my project a bit further, specifically with features and some art. Like I said earlier, it seems a bit bland, so I want to add in some visuals and fun things for the user to engage with. I also want to expand on the features. Maybe add in some advanced RNG factors and/or some new scenes/enemies. I also need to create a play again feature so that users can replay if they want.
 
 ### Week 3
 
