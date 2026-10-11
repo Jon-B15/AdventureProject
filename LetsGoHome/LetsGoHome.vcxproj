@@ -140,11 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dog.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="LetsGoHome.cpp" />
+    <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Choice.h" />
     <ClInclude Include="dev\Header Files\Dog.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

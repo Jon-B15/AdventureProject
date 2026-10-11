@@ -5,5 +5,5 @@ struct Choice
 {
 	std::string text;
 	std::string nextSceneId;
-	std::string requiredItem;
+	std::string requiredItem; //empty means no required item
 };

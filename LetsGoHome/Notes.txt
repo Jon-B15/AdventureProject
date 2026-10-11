@@ -3,3 +3,9 @@
 - created the project and put it into my folder, but unsure if that will work
 - Created the class for Dog. Header and source file are "complete".
 - creating the choice struct, this won't be anything to detailed, as I only need (for now) 3 variables, options, scene, item
+- made the scene class, added a default scene, an addchoice function, getters, and variables to the header.
+- built the scene source file and defined getters and the addChoice function
+- updated the dog class and some of game header to accommodate the fact that the user will be selecting a name for the dog.
+- had a syntax error in my game.cpp file in my while loop, getDescription needed to be const, same with the other getters in scene.h
+- main loop is working as intended. each choice leads to a new scene or goes back. Now I want to continue adding features
+- Added in a How to Play section. Might need to add on to this as I add features into the game
