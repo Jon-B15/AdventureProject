@@ -10,6 +10,13 @@ Game::Game() : currentSceneId("park")
 	buildScenes();
 }
 
+void Game::showInstructions() const
+{
+	std::cout << "How to Play\n" << "- Read the story, then type the number of your choice and press Enter.\n"
+		<< "- Look out for items you may pick up along the way, as they are used later on.\n"
+		<< "- Find your home to win!\n\n";
+}
+
 //printing the opening and using the dog
 void Game::showIntro(const Dog& dog) const
 {
@@ -129,6 +136,7 @@ int Game::readNumber(int min, int max) const
 void Game::run()
 {
 	std::cout << "=== Let's Go Home ===\n\n";
+	showInstructions();
 
 	std::vector<std::string> breeds = { "Golden Doodle", "Husky", "Pomeranian", "Corgi" };
 

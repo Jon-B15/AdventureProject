@@ -12,6 +12,9 @@ public:
 	void run();
 
 private:
+	//How to play section
+	void showInstructions() const;
+
 	//map to store value pairs to jump to any scene
 	std::map<std::string, Scene> scenes;
 
