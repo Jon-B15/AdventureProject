@@ -25,7 +25,7 @@ public:
 	const std::vector<Choice>& getChoices() const;
 	bool isEnding() const;
 
-	//needing a setter to run in the scenes portion for street art and gate art
+	//needing a setter and getter to run in the scenes portion for street art and gate art
 	void setArt(const std::string& newArt);
 	const std::string& getArt() const;
 

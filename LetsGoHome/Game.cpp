@@ -53,10 +53,10 @@ void Game::buildScenes()
 
 	scenes.emplace("street", Scene("street",
 		"A busy street. Cars rush past, so crossing is too dangerous."));
-	std::cout << streetArt;
 	scenes.at("street").addChoice("Check the bus stop", "busstop");
 	scenes.at("street").addChoice("Walk along the sidewalk to the alley", "alley");
 	scenes.at("street").addChoice("Go back to the park", "park");
+	scenes.at("street").setArt(streetArt);
 
 	//key item scene
 	scenes.emplace("busstop", Scene("busstop",
