@@ -171,6 +171,10 @@ void Game::run()
 	{
 		//.at() finds the scene by id
 		const Scene& scene = scenes.at(currentSceneId);
+		if (!scene.getArt().empty())
+		{
+			std::cout << scene.getArt();
+		}
 		std::cout << scene.getDescription() << "\n";
 
 		if (!scene.getItemFound().empty() && !hasItem(scene.getItemFound()))
