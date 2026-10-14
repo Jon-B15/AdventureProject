@@ -3,6 +3,7 @@
 #include <cctype>
 #include <cstdlib>
 #include <iostream>
+#include "Art.h"
 
 //constructor, starting in the park scene
 Game::Game() : currentSceneId("park")
@@ -20,6 +21,7 @@ void Game::showInstructions() const
 //printing the opening and using the dog
 void Game::showIntro(const Dog& dog) const
 {
+	std::cout << dogArt;
 	std::cout << "\nIt was a sunny afternoon at the park, and "
 		<< dog.getName() << " the " << dog.getBreed()
 		<< " was pulling happily at the leash. Then a squirrel darted past. "
@@ -51,6 +53,7 @@ void Game::buildScenes()
 
 	scenes.emplace("street", Scene("street",
 		"A busy street. Cars rush past, so crossing is too dangerous."));
+	std::cout << streetArt;
 	scenes.at("street").addChoice("Check the bus stop", "busstop");
 	scenes.at("street").addChoice("Walk along the sidewalk to the alley", "alley");
 	scenes.at("street").addChoice("Go back to the park", "park");

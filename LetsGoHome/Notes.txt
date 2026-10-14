@@ -9,3 +9,4 @@
 - had a syntax error in my game.cpp file in my while loop, getDescription needed to be const, same with the other getters in scene.h
 - main loop is working as intended. each choice leads to a new scene or goes back. Now I want to continue adding features
 - Added in a How to Play section. Might need to add on to this as I add features into the game
+- added art, dog art shows in the intro, but street art and gate art are showing up at the top of the console window

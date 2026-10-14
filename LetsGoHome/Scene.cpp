@@ -9,6 +9,8 @@ Scene::Scene(const std::string& sceneId,
 
 }
 
+void Scene::setArt(const std::string& newArt) { art = newArt; }
+
 //building addChoice using brace initialization, adding it to the end of the vector
 void Scene::addChoice(const std::string& text,
 	const std::string& nextSceneId,
