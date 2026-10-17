@@ -40,5 +40,7 @@ private:
 	void pickUpItem(const Scene& scene);
 	std::vector<Choice> getAvailableChoices(const Scene& scene) const;
 
+	const Scene* findScene(const std::string& id) const; //returning nullptr if no scene has the id
+
 };
 

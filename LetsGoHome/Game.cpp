@@ -135,6 +135,19 @@ int Game::readNumber(int min, int max) const
 	}
 }
 
+//look up scene by id and returns a pointer to it, or nullptr if it isn't there
+const Scene* Game::findScene(const std::string& id) const
+{
+	//find returns an iterator
+	auto it = scenes.find(id);
+	if (it == scenes.end())
+	{
+		return nullptr;
+	}
+	//it->second is the scene stored in the map
+	return &(it->second);
+}
+
 //showing the numbered breed list
 //updating the functions, adding individual functions for run()
 Dog Game::createPlayerDog() const
@@ -187,24 +200,31 @@ std::vector<Choice> Game::getAvailableChoices(const Scene& scene) const
 bool Game::playScene()
 {
 	//.at() finds the scene by id
-	const Scene& scene = scenes.at(currentSceneId);
+	//const Scene& scene = scenes.at(currentSceneId);
 
-	if (!scene.getArt().empty())
+	const Scene* scene = findScene(currentSceneId);
+	if (scene == nullptr)
 	{
-		std::cout << scene.getArt();
+		std::cout << "Error: no scene with that ID \"" << currentSceneId << "\".\n";
+		return false;
 	}
-	std::cout << scene.getDescription() << "\n";
 
-	pickUpItem(scene);
+	if (!scene->getArt().empty())
+	{
+		std::cout << scene->getArt();
+	}
+	std::cout << scene->getDescription() << "\n";
+
+	pickUpItem(*scene);
 
 	//ending
-	if (scene.isEnding())
+	if (scene->isEnding())
 	{
 		return false;
 	}
 
 	//show the numbered list
-	std::vector<Choice> available = getAvailableChoices(scene);
+	std::vector<Choice> available = getAvailableChoices(*scene);
 	std::cout << "\n";
 
 	for (size_t i = 0; i < available.size(); ++i)
