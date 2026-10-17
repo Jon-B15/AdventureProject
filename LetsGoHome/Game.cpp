@@ -136,6 +136,83 @@ int Game::readNumber(int min, int max) const
 }
 
 //showing the numbered breed list
+//updating the functions, adding individual functions for run()
+Dog Game::createPlayerDog() const
+{
+	std::vector<std::string> breeds = { "Golden Doodle", "Husky", "Pomeranian", "Corgi" };
+
+	std::cout << "Choose your dog's breed:/n";
+	for (size_t i = 0; i < breeds.size(); ++i)
+	{
+		std::cout << (i + 1) << ". " << breeds[i] << "\n";
+	}
+	int breedPick = readNumber(1, static_cast<int>(breeds.size()));
+	std::string breed = breeds[breedPick - 1];
+
+	std::string name;
+	while (name.empty())
+	{
+		std::cout << "Name your dog: ";
+
+		if (!std::getline(std::cin, name))
+		{
+			std::exit(0);
+		}
+	}
+	return Dog(name, breed);
+}
+
+void Game::pickUpItem(const Scene& scene)
+{
+	if (!scene.getItemFound().empty() && !hasItem(scene.getItemFound()))
+	{
+		inventory.push_back(scene.getItemFound());
+		std::cout << "You picked up: " << scene.getItemFound() << "\n";
+	}
+}
+
+std::vector<Choice> Game::getAvailableChoices(const Scene& scene) const
+{
+	std::vector<Choice> available;
+	for (const Choice& choice : scene.getChoices())
+	{
+		if (choice.requiredItem.empty() || hasItem(choice.requiredItem))
+		{
+			available.push_back(choice);
+		}
+	}
+	return available;
+}
+
+bool Game::playScene()
+{
+	//.at() finds the scene by id
+	const Scene& scene = scenes.at(currentSceneId);
+
+	if (!scene.getArt().empty())
+	{
+		std::cout << scene.getArt();
+	}
+	std::cout << scene.getDescription() << "\n";
+
+	pickUpItem(scene);
+
+	//ending
+	if (scene.isEnding())
+	{
+		return false;
+	}
+
+	//show the numbered list
+	std::vector<Choice> available = getAvailableChoices(scene);
+	std::cout << "\n";
+
+	for (size_t i = 0; i < available.size(); ++i)
+	{
+		std::cout << (i + 1) << ". " << available[i]
+	}
+}
+
 void Game::run()
 {
 	std::cout << "=== Let's Go Home ===\n\n";
