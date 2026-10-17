@@ -141,7 +141,7 @@ Dog Game::createPlayerDog() const
 {
 	std::vector<std::string> breeds = { "Golden Doodle", "Husky", "Pomeranian", "Corgi" };
 
-	std::cout << "Choose your dog's breed:/n";
+	std::cout << "Choose your dog's breed:\n";
 	for (size_t i = 0; i < breeds.size(); ++i)
 	{
 		std::cout << (i + 1) << ". " << breeds[i] << "\n";
@@ -213,7 +213,7 @@ bool Game::playScene()
 	}
 
 	int choicePick = readNumber(1, static_cast<int>(available.size()));
-	std::string breed = available[choicePick - 1].nextSceneId;
+	currentSceneId = available[choicePick - 1].nextSceneId;
 	std::cout << "\n";
 	return true;
 }

@@ -11,3 +11,7 @@
 - Added in a How to Play section. Might need to add on to this as I add features into the game
 - added art, dog art shows in the intro, but street art and gate art are showing up at the top of the console window
 - updated my Game::run() function to separate it into it's own functions rather than running everything in game::run
+- after updating the functions, my Goolden Doodle option is not showing
+	- UPDATE, was not missing... just had the wrong /n rather than \n
+- game only showing one reply no matter what option I chose
+	- resolved by updating a line playScene, instead of a string, it needed to be currentSceneId
