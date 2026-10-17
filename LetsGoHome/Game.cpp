@@ -200,7 +200,7 @@ std::vector<Choice> Game::getAvailableChoices(const Scene& scene) const
 //printing out the inventory as a csv or empty
 void Game::showInventory() const
 {
-	std::cout << "\nInventory";
+	std::cout << "\nInventory: ";
 	if (inventory.empty())
 	{
 		std::cout << "(empty)";
@@ -272,17 +272,23 @@ bool Game::playScene()
 
 	//show the numbered list
 	std::vector<Choice> available = getAvailableChoices(*scene);
-	std::cout << "\n";
-
-	for (size_t i = 0; i < available.size(); ++i)
-	{
-		std::cout << (i + 1) << ". " << available[i].text << "\n";
-	}
-
-	int choicePick = readNumber(1, static_cast<int>(available.size()));
-	currentSceneId = available[choicePick - 1].nextSceneId;
+	int choiceIndex = chooseOption(available);
+	currentSceneId = available[choiceIndex].nextSceneId;
 	std::cout << "\n";
 	return true;
+
+	//std::vector<Choice> available = getAvailableChoices(*scene);
+	//std::cout << "\n";
+
+	//for (size_t i = 0; i < available.size(); ++i)
+	//{
+	//	std::cout << (i + 1) << ". " << available[i].text << "\n";
+	//}
+
+	//int choicePick = readNumber(1, static_cast<int>(available.size()));
+	//currentSceneId = available[choicePick - 1].nextSceneId;
+	//std::cout << "\n";
+	//return true;
 }
 
 void Game::run()
