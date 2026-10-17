@@ -20,3 +20,4 @@
 	- added function for finding scene to include a pointer. updated play scene with the addition of the pointer
 - added showInventory function. not displaying how I would like when clicking the option
 	-edited the showInventory function, the cout "inventory" needed a space and colon
+- On to making a restart feature
