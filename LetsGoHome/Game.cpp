@@ -209,8 +209,13 @@ bool Game::playScene()
 
 	for (size_t i = 0; i < available.size(); ++i)
 	{
-		std::cout << (i + 1) << ". " << available[i]
+		std::cout << (i + 1) << ". " << available[i].text << "\n";
 	}
+
+	int choicePick = readNumber(1, static_cast<int>(available.size()));
+	std::string breed = available[choicePick - 1].nextSceneId;
+	std::cout << "\n";
+	return true;
 }
 
 void Game::run()
