@@ -197,6 +197,53 @@ std::vector<Choice> Game::getAvailableChoices(const Scene& scene) const
 	return available;
 }
 
+//printing out the inventory as a csv or empty
+void Game::showInventory() const
+{
+	std::cout << "\nInventory";
+	if (inventory.empty())
+	{
+		std::cout << "(empty)";
+	}
+	for (size_t i = 0; i < inventory.size(); ++i)
+	{
+		if (i > 0)
+		{
+			std::cout << ", ";
+		}
+		std::cout << inventory[i];
+	}
+	std::cout << "\n";
+}
+
+//shows the number menu plus check inventory
+int Game::chooseOption(const std::vector<Choice>& available) const
+{
+	int inventoryNumber = static_cast<int>(available.size()) + 1;
+
+	//loop so the player can check as many times as needed
+	while (true)
+	{
+		std::cout << "\n";
+		for (size_t i = 0; i < available.size(); ++i)
+		{
+			std::cout << (i + 1) << ". " << available[i].text << "\n";
+		}
+		std::cout << inventoryNumber << ". Check inventory\n";
+
+		int pick = readNumber(1, inventoryNumber);
+
+		if (pick == inventoryNumber)
+		{
+			showInventory(); //show it and then go through loop
+		}
+		else
+		{
+			return pick - 1;
+		}
+	}
+}
+
 bool Game::playScene()
 {
 	//.at() finds the scene by id
