@@ -223,72 +223,12 @@ void Game::run()
 	std::cout << "=== Let's Go Home ===\n\n";
 	showInstructions();
 
-	std::vector<std::string> breeds = { "Golden Doodle", "Husky", "Pomeranian", "Corgi" };
-
-	std::cout << "Choose your dog's breed:\n";
-	for (size_t i = 0; i < breeds.size(); ++i)
-	{
-		std::cout << (i + 1) << ". " << breeds[i] << "\n";
-	}
-
-	int pick = readNumber(1, static_cast<int>(breeds.size()));
-	std::string breed = breeds[pick - 1];
-
-	std::string name;
-	while (name.empty())
-	{
-		std::cout << "Name your dog: ";
-
-		if (!std::getline(std::cin, name))
-		{
-			std::exit(0);
-		}
-	}
-
-	//build dog
-	Dog player(name, breed);
+	Dog player = createPlayerDog();
 	showIntro(player);
 
-	while (true)
+	//play scene returns false when reaching an ending, stopping the loop
+	while (playScene())
 	{
-		//.at() finds the scene by id
-		const Scene& scene = scenes.at(currentSceneId);
-		if (!scene.getArt().empty())
-		{
-			std::cout << scene.getArt();
-		}
-		std::cout << scene.getDescription() << "\n";
-
-		if (!scene.getItemFound().empty() && !hasItem(scene.getItemFound()))
-		{
-			inventory.push_back(scene.getItemFound());
-			std::cout << "You picked up: " << scene.getItemFound() << "\n";
-		}
-
-		//stops the loop
-		if (scene.isEnding())
-		{
-			break;
-		}
-
-		//collects only the choices the player can actually take
-		std::vector<Choice> available;
-		for (const Choice& choice : scene.getChoices())
-		{
-			if (choice.requiredItem.empty() || hasItem(choice.requiredItem))
-			{
-				available.push_back(choice);
-			}
-		}
-
-		//show the numbered list
-		std::cout << "\n";
-		for (size_t i = 0; i < available.size(); ++i)
-		{
-			std::cout << (i + 1) << ". " << available[i].text << "\n";
-		}
-		int pick = readNumber(1, static_cast<int>(available.size()));
-		currentSceneId = available[pick - 1].nextSceneId;
-		std::cout << "\n";
+		//play scene handles everything
 	}
 }
