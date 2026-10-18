@@ -38,7 +38,8 @@ My next steps are taking my project a bit further, specifically with features an
 
 ### Week 3
 
-Stay tuned, this stand up is coming soon...
+Stand Up:
+This week I worked on adding features to my project, specifically ones that gave the game more life. I also worked on updating my Game::run() function to be more readable. Early in the week I worked on adding some ASCII art into the game. I added 3 pieces of art, a dog, a street, and a gate. I may add some more because it looks good. I also worked on adding in features such as an option to the player to show their inventory and a restart option after the game is complete. Updating my Game::run() function went well. I basically just took out the pieces of what made up the function and made them into their own functions instead of running everything in run(). I think this is easier to read and also easier to pinpoint any issues/errors that arise. Also added in a pointer that returns a nullptr whenever a scene Id is not found. The challenges this week were updating the run function as I needed to figure out what needed to stay and what needed to go. Also creating the showInventory function was something that took some time. My next steps are to explore adding more scenes/art. Also possibly adding in some sort of additional combat feature like RNG based. I want to run through each class next week and make sure everything is readable and there are no issues or memory leaks.
 
 ### Week 4
 

@@ -3,6 +3,7 @@
 #include <cctype>
 #include <cstdlib>
 #include <iostream>
+#include "Art.h"
 
 //constructor, starting in the park scene
 Game::Game() : currentSceneId("park")
@@ -20,6 +21,7 @@ void Game::showInstructions() const
 //printing the opening and using the dog
 void Game::showIntro(const Dog& dog) const
 {
+	std::cout << dogArt;
 	std::cout << "\nIt was a sunny afternoon at the park, and "
 		<< dog.getName() << " the " << dog.getBreed()
 		<< " was pulling happily at the leash. Then a squirrel darted past. "
@@ -54,6 +56,7 @@ void Game::buildScenes()
 	scenes.at("street").addChoice("Check the bus stop", "busstop");
 	scenes.at("street").addChoice("Walk along the sidewalk to the alley", "alley");
 	scenes.at("street").addChoice("Go back to the park", "park");
+	scenes.at("street").setArt(streetArt);
 
 	//key item scene
 	scenes.emplace("busstop", Scene("busstop",
@@ -132,12 +135,23 @@ int Game::readNumber(int min, int max) const
 	}
 }
 
-//showing the numbered breed list
-void Game::run()
+//look up scene by id and returns a pointer to it, or nullptr if it isn't there
+const Scene* Game::findScene(const std::string& id) const
 {
-	std::cout << "=== Let's Go Home ===\n\n";
-	showInstructions();
+	//find returns an iterator
+	auto it = scenes.find(id);
+	if (it == scenes.end())
+	{
+		return nullptr;
+	}
+	//it->second is the scene stored in the map
+	return &(it->second);
+}
 
+//showing the numbered breed list
+//updating the functions, adding individual functions for run()
+Dog Game::createPlayerDog() const
+{
 	std::vector<std::string> breeds = { "Golden Doodle", "Husky", "Pomeranian", "Corgi" };
 
 	std::cout << "Choose your dog's breed:\n";
@@ -145,9 +159,8 @@ void Game::run()
 	{
 		std::cout << (i + 1) << ". " << breeds[i] << "\n";
 	}
-
-	int pick = readNumber(1, static_cast<int>(breeds.size()));
-	std::string breed = breeds[pick - 1];
+	int breedPick = readNumber(1, static_cast<int>(breeds.size()));
+	std::string breed = breeds[breedPick - 1];
 
 	std::string name;
 	while (name.empty())
@@ -159,47 +172,136 @@ void Game::run()
 			std::exit(0);
 		}
 	}
+	return Dog(name, breed);
+}
 
-	//build dog
-	Dog player(name, breed);
-	showIntro(player);
+void Game::pickUpItem(const Scene& scene)
+{
+	if (!scene.getItemFound().empty() && !hasItem(scene.getItemFound()))
+	{
+		inventory.push_back(scene.getItemFound());
+		std::cout << "You picked up: " << scene.getItemFound() << "\n";
+	}
+}
 
+std::vector<Choice> Game::getAvailableChoices(const Scene& scene) const
+{
+	std::vector<Choice> available;
+	for (const Choice& choice : scene.getChoices())
+	{
+		if (choice.requiredItem.empty() || hasItem(choice.requiredItem))
+		{
+			available.push_back(choice);
+		}
+	}
+	return available;
+}
+
+//printing out the inventory as a csv or empty
+void Game::showInventory() const
+{
+	std::cout << "\nInventory: ";
+	if (inventory.empty())
+	{
+		std::cout << "(empty)";
+	}
+	for (size_t i = 0; i < inventory.size(); ++i)
+	{
+		if (i > 0)
+		{
+			std::cout << ", ";
+		}
+		std::cout << inventory[i];
+	}
+	std::cout << "\n";
+}
+
+//shows the number menu plus check inventory
+int Game::chooseOption(const std::vector<Choice>& available) const
+{
+	int inventoryNumber = static_cast<int>(available.size()) + 1;
+
+	//loop so the player can check as many times as needed
 	while (true)
 	{
-		//.at() finds the scene by id
-		const Scene& scene = scenes.at(currentSceneId);
-		std::cout << scene.getDescription() << "\n";
-
-		if (!scene.getItemFound().empty() && !hasItem(scene.getItemFound()))
-		{
-			inventory.push_back(scene.getItemFound());
-			std::cout << "You picked up: " << scene.getItemFound() << "\n";
-		}
-
-		//stops the loop
-		if (scene.isEnding())
-		{
-			break;
-		}
-
-		//collects only the choices the player can actually take
-		std::vector<Choice> available;
-		for (const Choice& choice : scene.getChoices())
-		{
-			if (choice.requiredItem.empty() || hasItem(choice.requiredItem))
-			{
-				available.push_back(choice);
-			}
-		}
-
-		//show the numbered list
 		std::cout << "\n";
 		for (size_t i = 0; i < available.size(); ++i)
 		{
 			std::cout << (i + 1) << ". " << available[i].text << "\n";
 		}
-		int pick = readNumber(1, static_cast<int>(available.size()));
-		currentSceneId = available[pick - 1].nextSceneId;
-		std::cout << "\n";
+		std::cout << inventoryNumber << ". Check inventory\n";
+
+		int pick = readNumber(1, inventoryNumber);
+
+		if (pick == inventoryNumber)
+		{
+			showInventory(); //show it and then go through loop
+		}
+		else
+		{
+			return pick - 1;
+		}
+	}
+}
+
+bool Game::playScene()
+{
+	//.at() finds the scene by id
+	//const Scene& scene = scenes.at(currentSceneId);
+
+	const Scene* scene = findScene(currentSceneId);
+	if (scene == nullptr)
+	{
+		std::cout << "Error: no scene with that ID \"" << currentSceneId << "\".\n";
+		return false;
+	}
+
+	if (!scene->getArt().empty())
+	{
+		std::cout << scene->getArt();
+	}
+	std::cout << scene->getDescription() << "\n";
+
+	pickUpItem(*scene);
+
+	//ending
+	if (scene->isEnding())
+	{
+		return false;
+	}
+
+	//show the numbered list
+	std::vector<Choice> available = getAvailableChoices(*scene);
+	int choiceIndex = chooseOption(available);
+	currentSceneId = available[choiceIndex].nextSceneId;
+	std::cout << "\n";
+	return true;
+
+	//std::vector<Choice> available = getAvailableChoices(*scene);
+	//std::cout << "\n";
+
+	//for (size_t i = 0; i < available.size(); ++i)
+	//{
+	//	std::cout << (i + 1) << ". " << available[i].text << "\n";
+	//}
+
+	//int choicePick = readNumber(1, static_cast<int>(available.size()));
+	//currentSceneId = available[choicePick - 1].nextSceneId;
+	//std::cout << "\n";
+	//return true;
+}
+
+void Game::run()
+{
+	std::cout << "=== Let's Go Home ===\n\n";
+	showInstructions();
+
+	Dog player = createPlayerDog();
+	showIntro(player);
+
+	//play scene returns false when reaching an ending, stopping the loop
+	while (playScene())
+	{
+		//play scene handles everything
 	}
 }
