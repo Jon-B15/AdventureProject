@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JBangert-Milestone2-Planning.md",
+                "file": "JBangert-VersionControl.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JBangert-Milestone2-Planning"
+              "title": "JBangert-VersionControl"
             }
           }
         ]
@@ -189,5 +189,10 @@
     }
   },
   "active": "8e80773157862d08",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "JBangert-VersionControl 1.md",
+    "JBangert-VersionControl.md",
+    "Milestone3.md.md",
+    "JBangert-Milestone2-Planning.md"
+  ]
 }
