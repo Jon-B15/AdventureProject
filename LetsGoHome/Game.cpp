@@ -217,17 +217,29 @@ void Game::showInventory() const
 }
 
 //shows the number menu plus check inventory
-int Game::chooseOption(const std::vector<Choice>& available) const
+std::string Game::chooseOption(const Scene& scene)
 {
-	int inventoryNumber = static_cast<int>(available.size()) + 1;
-
 	//loop so the player can check as many times as needed
 	while (true)
 	{
+		std::vector<Choice> available = getAvailableChoices(scene);
+
+		//pickup option only appears if the scene has an item
+		bool pickUp = !scene.getItemFound().empty() && !hasItem(scene.getItemFound());
+
+		//? being shorthand if/else statement. if pickup is true use the first value
+		int next = static_cast<int>(available.size()) + 1;
+		int pickUpNumber = pickUp ? next : 0;
+		int inventoryNumber = pickUp ? next + 1 : next;
+
 		std::cout << "\n";
 		for (size_t i = 0; i < available.size(); ++i)
 		{
 			std::cout << (i + 1) << ". " << available[i].text << "\n";
+		}
+		if (pickUp)
+		{
+			std::cout << pickUpNumber << ". Pick up the " << scene.getItemFound() << "\n";
 		}
 		std::cout << inventoryNumber << ". Check inventory\n";
 
@@ -237,9 +249,14 @@ int Game::chooseOption(const std::vector<Choice>& available) const
 		{
 			showInventory(); //show it and then go through loop
 		}
+		else if (pickUp && pick == pickUpNumber)
+		{
+			pickUpItem(scene); //adds the item
+		}
 		else
 		{
-			return pick - 1;
+			//return the id of the scene it leads to
+			return available[pick - 1].nextSceneId;
 		}
 	}
 }
@@ -262,8 +279,6 @@ bool Game::playScene()
 	}
 	std::cout << scene->getDescription() << "\n";
 
-	pickUpItem(*scene);
-
 	//ending
 	if (scene->isEnding())
 	{
@@ -271,24 +286,14 @@ bool Game::playScene()
 	}
 
 	//show the numbered list
-	std::vector<Choice> available = getAvailableChoices(*scene);
-	int choiceIndex = chooseOption(available);
-	currentSceneId = available[choiceIndex].nextSceneId;
-	std::cout << "\n";
-	return true;
-
 	//std::vector<Choice> available = getAvailableChoices(*scene);
-	//std::cout << "\n";
-
-	//for (size_t i = 0; i < available.size(); ++i)
-	//{
-	//	std::cout << (i + 1) << ". " << available[i].text << "\n";
-	//}
-
-	//int choicePick = readNumber(1, static_cast<int>(available.size()));
-	//currentSceneId = available[choicePick - 1].nextSceneId;
+	//int choiceIndex = chooseOption(available);
+	//currentSceneId = available[choiceIndex].nextSceneId;
 	//std::cout << "\n";
 	//return true;
+	currentSceneId = chooseOption(*scene);
+	std::cout << "\n";
+	return true;
 }
 
 void Game::run()
