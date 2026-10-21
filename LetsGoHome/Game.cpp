@@ -14,7 +14,7 @@ Game::Game() : currentSceneId("park")
 void Game::showInstructions() const
 {
 	std::cout << "How to Play\n" << "- Read the story, then type the number of your choice and press Enter.\n"
-		<< "- Look out for items you may pick up along the way, as they are used later on.\n"
+		<< "- Look out for items you'll want to pick up along the way, as they are used later on.\n"
 		<< "- Find your home to win!\n\n";
 }
 
