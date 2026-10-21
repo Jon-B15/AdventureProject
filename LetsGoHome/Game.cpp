@@ -78,6 +78,7 @@ void Game::buildScenes()
 	scenes.at("gate").addChoice("Unlock the gate with the key", "home", "gate key");
 	scenes.at("gate").addChoice("Bark for help", "shelter");
 	scenes.at("gate").addChoice("Go back to the street", "street");
+	scenes.at("gate").setArt(gateArt);
 
 	//endings: the last argument (true) marks the scene as an ending
 	scenes.emplace("home", Scene("home",
