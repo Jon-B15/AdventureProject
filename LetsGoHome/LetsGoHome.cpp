@@ -3,21 +3,6 @@
 #include "Choice.h"
 #include "Game.h"
 
-//int main()
-//{
-//	do
-//	{
-//		Game game;
-//		game.run();
-//	} while (askPlayAgain());
-//
-//	std::cout << "\nThanks for playing!\n";
-//	return 0;
-//
-//	Game game;
-//	game.run();
-//	return 0;
-//}
 
 //asking player if they want to restart
 bool askPlayAgain()

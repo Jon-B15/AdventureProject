@@ -43,7 +43,7 @@ private:
 	const Scene* findScene(const std::string& id) const; //returning nullptr if no scene has the id
 	
 	void showInventory() const; //prints the items the player has
-	int chooseOption(const std::vector<Choice>& available) const; //shows the menu, returns the index
+	std::string chooseOption(const Scene& scene); //shows the menu, returns the index
 
 };
 
